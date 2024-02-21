@@ -1,0 +1,83 @@
+▼言語・ライブラリ
+■Kotlin
+・Kotlinはjavaの改良版ともいえるもので、Android開発の公式言語としてGoogleにサポートされるようになり、将来性が高い
+→　技術探求心で経験が薄いが将来性の高い言語を選択
+→　javaを習得していれば学習コストは最小限
+
+・Kotlinはjavaより強力な型推論やnull安全性を持ち、コードの記述量を減らしながら安全性を保つことができる
+＜例：型推論＞
+#javaの場合
+Map<String, List<String>> map = new HashMap<String, List<String>>();
+#Kotlinの場合
+val map = mutableMapOf<String, List<String>>()
+★変数mapの型は自動的に推論され、コードが簡潔になる
+
+＜例：null安全性＞
+#javaの場合
+String str = null;
+System.out.println(str.length());
+#Kotlinの場合
+var str: String? = null
+println(str?.length)
+★javaの場合はNullPointerExceptionが発生するが、
+Kotlinは?を指定することによりnullの場合はnullを返し、null以外のときlengthを返すので安全で簡潔なコードが書ける
+
+・KotlinはJavaのプラットフォーム上で動作するので、Javaの豊富な資源も使うことができ、javaを習得していればアサインしやすい。
+
+・KotlinのVerは最新の1.9.22を採用
+
+・java（JVM）のverは最新の21を採用
+→　最新のVerを使うことにより、サポート期限が長くなるので脆弱性に対して安全性が高くなる
+
+
+■SpringBoot
+・プロジェクトを「https://start.spring.io/」からテンプレート作成が出来るため、容易に立ち上げられる
+・アプリケーションを作成するうえで必要な設定を自動でやってくれるので開発者はビジネスロジックの実装に集中できる
+・Tomcatなどの組み込みサーバーをサポートしており、別途サーバーを設定する必要がない
+・広範なコミュニティに支えられており、多くのドキュメント、チュートリアル、サポートが利用可能な為、問題解決が容易
+・SpringBootのスターター依存関係を利用することで、必要なライブラリを簡単に追加できる。
+→　今回では以下を使用
+spring-boot-starter
+→　Spring Bootの基本的なスターターで、Spring Bootアプリケーションの開発に必要な基本的な依存関係が含まれている
+spring-boot-starter-web
+→　Spring MVCとTomcatを組み込みサーバーとして使用するための依存関係が含まれている
+spring-boot-starter-webflux
+→　Spring WebFluxを利用したリアクティブなWebアプリケーションを簡単に作成できる
+spring-boot-starter-validation
+→　バリデーション機能をアプリケーションに追加するためのスターターで、入力検証に利用
+spring-boot-starter-test
+→　テストをサポートするためのスターターで、JUnit、Spring Test、Mockitoなど、テストに必要な主要なライブラリが含まれている。（今回テストは未実装）
+
+・Verは安定板の3.2.2を採用
+
+■Vue.js
+・Vue.jsは定期的にセキュリティアップデートを行っており、脆弱性が発見された場合には迅速に対応している
+・Vue.jsのドキュメントは非常に充実しており、公式サイトで多くのガイドやチュートリアルが提供されている
+・verは最新版の3.4.19を利用
+
+■Nuxt.js
+・Nuxt.jsはVue.jsをベースにしたフレームワークで静的サイト生成などの機能を簡単に実装できる
+・Vue同様、脆弱性が報告された場合には迅速に対処されている
+・Vue.jsの資産をそのまま活用しつつ、静的サイト生成などの高度な機能を簡単に利用できる
+→　Vue.jsを習得していれば学習コストは最小限
+・verは最新板の3.10.2を利用
+
+・通信にはフロントエンドで広く使われているaxiosを採用
+→　通信に必要な機能は揃っておりドキュメントも豊富
+・verは最新の2.6.12を利用
+
+
+▼環境
+■Docker
+・verは最新の3.9を利用
+・bookfrontendとbookbackendの環境を分けて管理
+
+・フロント側
+　Docker起動に合わせて必要なライブラリをpackage.jsonからコンテナにインストールしてアプリを起動
+　nodeは安定版のver18を利用
+
+・バック側
+　JVMもサーバーサイトと併せて最新のOpenJDK Ver21を採用
+　ローカルでビルドしたjarをコンテナに配備してアプリケーションを起動
+　ログを出力
+
