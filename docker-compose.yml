@@ -1,0 +1,29 @@
+version: '3.9'
+services:
+  bookfrontend:
+    container_name: bookfrontend
+    restart: always
+    build: ./bookfrontend
+    tty: true
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./bookfrontend:/app
+      - /app/node_modules
+    command: yarn dev
+    env_file:
+      - .env
+  bookbackend:
+    container_name: bookbackend
+    restart: always
+    build:
+      context: ./bookbackend
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./logs:/app/logs
+    environment:
+      SPRING_PROFILES_ACTIVE: 'dev'
+    env_file:
+      - .env
