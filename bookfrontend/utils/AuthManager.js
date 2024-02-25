@@ -1,7 +1,7 @@
-import CookieManager from '@/utils/CookieManager.js';
+import cookieManager from '~/utils/cookieManager.js';
 
-export const AuthManager = {
-  mixins: [CookieManager],
+export const authManager = {
+  mixins: [cookieManager],
   methods: {
     checkAccessToken() {
       const accessToken = this.getCookie('accessToken');

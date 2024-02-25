@@ -8,15 +8,17 @@
 </template>
 
 <script>
-import CookieManager from '@/utils/CookieManager.js'
 
 export default {
-  mixins: [CookieManager],
+  computed: {
+    accessToken() {
+      return this.$store.state.accessToken;
+    }
+  },
   methods: {
     handleSearchBooks() {
-      const accessToken = this.getCookie('accessToken');
       // accessTokenがない場合
-      if (!accessToken) {
+      if (!this.accessToken) {
         // 認証処理
         this.redirectToGoogleOAuth();
       } else {

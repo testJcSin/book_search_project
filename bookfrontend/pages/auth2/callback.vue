@@ -4,10 +4,10 @@
 
 <script>
 import axios from 'axios';
-import CookieManager from '@/utils/CookieManager.js'
+import cookieManager from '@/utils/cookieManager.js'
 
 export default {
-  mixins: [CookieManager],
+  mixins: [cookieManager],
   mounted() {
     this.getAccessToken();
   },

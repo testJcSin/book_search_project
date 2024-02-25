@@ -14,11 +14,11 @@
 
 <script>
 import axios from 'axios';
-import { AuthManager } from '@/utils/AuthManager.js';
+import { authManager } from '@/utils/authManager.js';
 
 export default {
   middleware: 'auth',
-  mixins: [AuthManager],
+  mixins: [authManager],
   data() {
     return {
       question: '',
