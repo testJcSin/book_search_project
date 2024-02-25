@@ -27,7 +27,6 @@ Kotlinは?を指定することによりnullの場合はnullを返し、null以�
 ・KotlinのVerは最新の1.9.22を採用
 
 ・java（JVM）のverは最新の21を採用
-→　最新のVerを使うことにより、サポート期限が長くなるので脆弱性に対して安全性が高くなる
 
 
 ■SpringBoot
@@ -48,19 +47,21 @@ spring-boot-starter-validation
 spring-boot-starter-test
 →　テストをサポートするためのスターターで、JUnit、Spring Test、Mockitoなど、テストに必要な主要なライブラリが含まれている。（今回テストは未実装）
 
-・Verは安定板の3.2.2を採用
+・Verは3.2.2を採用
 
 ■Vue.js
 ・Vue.jsは定期的にセキュリティアップデートを行っており、脆弱性が発見された場合には迅速に対応している
 ・Vue.jsのドキュメントは非常に充実しており、公式サイトで多くのガイドやチュートリアルが提供されている
-・verは最新版の3.4.19を利用
+・verは安定版の2.7.10を利用
+→ V3と比べ長い間使われてきたため、多くのプロジェクトでの実績があり、バグや問題が少なく、安定している
 
 ■Nuxt.js
 ・Nuxt.jsはVue.jsをベースにしたフレームワークで静的サイト生成などの機能を簡単に実装できる
 ・Vue同様、脆弱性が報告された場合には迅速に対処されている
 ・Vue.jsの資産をそのまま活用しつつ、静的サイト生成などの高度な機能を簡単に利用できる
 →　Vue.jsを習得していれば学習コストは最小限
-・verは最新板の3.10.2を利用
+・verは安定版の2.17.3を利用
+→ Vue.jsと同様
 
 ・通信にはフロントエンドで広く使われているaxiosを採用
 →　通信に必要な機能は揃っておりドキュメントも豊富
@@ -74,7 +75,10 @@ spring-boot-starter-test
 
 ・フロント側
 　Docker起動に合わせて必要なライブラリをpackage.jsonからコンテナにインストールしてアプリを起動
-　nodeは安定版のver18を利用
+　nodeはver20を利用
+　→　ver21では以下エラーが発生するのでver20を適用
+DeprecationWarning: The punycode module is deprecated. Please use a userland alternative instead
+
 
 ・バック側
 　JVMもサーバーサイトと併せて最新のOpenJDK Ver21を採用

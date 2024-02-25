@@ -15,4 +15,11 @@ export const state = () => ({
         commit('setAccessToken', token)
       }
     },
+    setAccessToken({ commit }, { accessToken, expiresIn }) {
+      commit('setAccessToken', accessToken);
+      this.$cookies.set('accessToken', accessToken, {
+        path: '/',
+        maxAge: 60 * 60 * expiresIn,
+      });
+    }, 
   };

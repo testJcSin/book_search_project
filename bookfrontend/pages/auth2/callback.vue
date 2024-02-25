@@ -4,10 +4,8 @@
 
 <script>
 import axios from 'axios';
-import cookieManager from '@/utils/cookieManager.js'
 
 export default {
-  mixins: [cookieManager],
   mounted() {
     this.getAccessToken();
   },
@@ -21,7 +19,7 @@ export default {
           const { accessToken } = response.data;
           if (accessToken) {
             // accesstoken保存
-            this.setCookie('accessToken', accessToken, 24);
+            this.$store.dispatch('setAccessToken', { accessToken, expiresIn: 24 });
             // 書籍検索画面へ遷移
             this.$router.push('/SearchPage');
           }

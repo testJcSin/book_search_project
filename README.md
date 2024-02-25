@@ -23,7 +23,7 @@
      - CHATTING_API_KEY=ChatGPT APIのアクセスキー
      - GOOGLE_CLIENT_ID=Google Oauth 利用のためのクライアント ID
      - GOOGLE_CLIENT_SECRET=Google Oauth 利用のためのクライアント シークレット
-     - GOOGLE_REDIRECT_URI=localhost:8080/auth2/callback
+     - GOOGLE_REDIRECT_URI=localhost:8080/auth2/Callback
      - TRANSLATE_API_KEY=Google Cloud Translation APIのAPIキー
      - SECRET_KEY=秘密鍵（適当な文字列）
 
@@ -31,7 +31,8 @@
    - ターミナルから「book_search_project/bookbackend」配下に移動し、以下コマンドを実行（jarが作成される）
      - ./gradlew clean build
    - ターミナルから「book_search_project」配下に移動し、以下コマンドを実行（Dockerが起動）
-     - docker-compose up --build
+     - docker-compose build --no-cache
+     - docker-compose up
 
 ### 5. アプリケーションにアクセス
    - Dockerが起動した後、以下URLにアクセスすることで書籍検索画面トップが表示

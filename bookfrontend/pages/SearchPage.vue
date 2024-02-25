@@ -9,24 +9,43 @@
     <div class="answer-output">
       <textarea v-model="answer" readonly rows="10"></textarea>
     </div>
-  </div>
+    <custom-dialog v-if="showDialog" @close="handleDialogClose">
+      <p>認証に失敗しました</p>
+    </custom-dialog>
+</div>
 </template>
 
 <script>
 import axios from 'axios';
-import { authManager } from '@/utils/authManager.js';
+import CustomDialog from '@/components/CustomDialog.vue';
 
 export default {
-  middleware: 'auth',
-  mixins: [authManager],
   data() {
     return {
       question: '',
       answer: '',
-      errorMessage: ''
+      errorMessage: '',
+      showDialog: false
     };
   },
+  components: {
+    CustomDialog
+  },
+  computed: {
+    accessToken() {
+      return this.$store.state.accessToken;
+    }
+  },
+  created() {
+    this.checkAuthentication();
+  },
   methods: {
+    checkAuthentication() {
+      // accessToken の有無をチェック
+      if (!this.accessToken) {
+        this.showDialog = true;
+      }
+    },
     checkInput() {
       if (!this.question.trim()) {
         this.answer = '質問を入力してください。';
@@ -37,11 +56,13 @@ export default {
     focusSubmitButton() {
       this.$refs.submitButton.focus();
     },
+    handleDialogClose() {
+      this.showDialog = false;
+      this.$router.push('/SearchTop');
+    },
     async submitQuestion() {
-      // アクセストークンのチェック
-      if (!this.checkAccessToken()) return;
       // 入力値チェック
-      //if (!this.checkInput()) return;
+      if (!this.checkInput()) return;
       try {
         const response = await axios.get('http://localhost:8081/bookSearch', { 
           params: { question: this.question }
@@ -49,18 +70,16 @@ export default {
         this.answer = response.data.answer;
         this.errorMessage = '';
       } catch (error) {
-        // エラーレスポンスから特定のメッセージを抽出して表示
-        if (error.response && error.response.data) {
-          // エラーメッセージがオブジェクト形式であることを想定
-          const errorMessages = error.response.data;
-          // 最初のエラーメッセージの値を取得
-          const firstErrorMessage = errorMessages[Object.keys(errorMessages)[0]];
-          // errorMessageに設定
-          this.errorMessage = firstErrorMessage;
-        } else {
-          // 予期せぬエラーの場合は汎用メッセージを表示
-          this.errorMessage = 'エラーが発生しました。';
-        }
+        this.handleErrorResponse(error);
+      }
+    },
+    handleErrorResponse(error) {
+      if (error.response && error.response.data) {
+        const errorMessages = error.response.data;
+        const firstErrorMessage = errorMessages[Object.keys(errorMessages)[0]];
+        this.errorMessage = firstErrorMessage;
+      } else {
+        this.errorMessage = 'エラーが発生しました。';
       }
     }
   }
